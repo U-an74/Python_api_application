@@ -2,18 +2,22 @@
 
 OpenAI의 GPT5.4 모델과 카카오 로컬 rest API를 결합하여, 사용자가 원하는 지역의 여행 계획과 실시간 맛집/명소 정보를 제공하는 파이썬 애플리케이션입니다.
 
+<br>
+
 ## 🚀 주요 기능
 - **LLM 기반 여행 일정 생성**: OpenAI API를 사용하여 사용자의 목적지에 맞는 맞춤형 여행 코스를 제안합니다.
 - **실시간 장소 검색**: 카카오 로컬 API를 통해 제안된 장소의 정확한 명칭과 정보를 확인합니다.
 - **결과 리포트 저장**: 생성된 여행 일정과 검색 결과를 `results/` 폴더에 마크다운(.md) 및 제이슨(.json) 파일로 자동 저장합니다.
 - **CLI 인터페이스**: 터미널에서 날짜와 목적지를 입력받아 간편하게 실행할 수 있습니다. (입력/요청: -date "YYYY-MM-DD")
 
+<br>
 
 ## 🛠 기술 스택
 - **Language**: Python 3.14.7
 - **APIs**: OpenAI API, Kakao Local API
 - **Libraries**: `python-dotenv`, `requests`, `openai`
 
+<br>
 
 ## 📦 기본 환경 설정 및 실행 방법
 
@@ -66,6 +70,7 @@ python main.py -d 2026-11-10
 python main.py --help
 ```
 
+<br>
 
 ## 📂 프로젝트 구조
 - main.py: 프로그램 실행 메인 로직
@@ -101,7 +106,7 @@ python main.py --help
 <img width="1116" height="457" alt="image (1)" src="https://github.com/user-attachments/assets/49a4c594-845e-40fd-b89c-ba4c5c106064" />
 <img width="1092" height="770" alt="image (2)" src="https://github.com/user-attachments/assets/15753043-afad-41d5-bdd8-eb8bbf6a3e82" />
 
-
+<br>
 
 ## 🧠 Technical Insights
 
