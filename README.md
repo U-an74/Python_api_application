@@ -2,22 +2,18 @@
 
 OpenAI의 GPT5.4 모델과 카카오 로컬 rest API를 결합하여, 사용자가 원하는 지역의 여행 계획과 실시간 맛집/명소 정보를 제공하는 파이썬 애플리케이션입니다.
 
-<br>
-
 ## 🚀 주요 기능
 - **LLM 기반 여행 일정 생성**: OpenAI API를 사용하여 사용자의 목적지에 맞는 맞춤형 여행 코스를 제안합니다.
 - **실시간 장소 검색**: 카카오 로컬 API를 통해 제안된 장소의 정확한 명칭과 정보를 확인합니다.
 - **결과 리포트 저장**: 생성된 여행 일정과 검색 결과를 `results/` 폴더에 마크다운(.md) 및 제이슨(.json) 파일로 자동 저장합니다.
 - **CLI 인터페이스**: 터미널에서 날짜와 목적지를 입력받아 간편하게 실행할 수 있습니다. (입력/요청: -date "YYYY-MM-DD")
 
-<br>
 
 ## 🛠 기술 스택
 - **Language**: Python 3.14.7
 - **APIs**: OpenAI API, Kakao Local API
 - **Libraries**: `python-dotenv`, `requests`, `openai`
 
-<br>
 
 ## 📦 기본 환경 설정 및 실행 방법
 
@@ -70,7 +66,6 @@ python main.py -d 2026-11-10
 python main.py --help
 ```
 
-<br>
 
 ## 📂 프로젝트 구조
 - main.py: 프로그램 실행 메인 로직
@@ -90,23 +85,29 @@ python main.py --help
 | **Main** | `main` | `args: Namespace` | `Markdown & JSON Files` |
 
 
-## 📄 결과물 예시
-- 실행이 완료되면 results/ 폴더 내에 여행추천_YYYYMMDD_HHMMSS.md 형태로 결과가 저장됩니다.(results/sample_result.md 참조)
+## 📄 결과물
+- 실행이 완료되면 results/ 폴더 내에 [raw_YYYYMMDD.json], [result_YYYYMMDD.md] 형태로 결과가 저장됩니다. (results/sample 파일 참조)
 
 - 결과물 구조
-  1. 추천 지역 요약(지역명, 추천 이유)
-  2. 날씨 정보
-  3. 행사 / 축제
-  4. 맛집 리스트
-  5. 1일 일정 제안
-  6. 추천 포인트
+  1. 메타데이터(기준일, 생성일, 출처)
+  2. 제목 및 추천 지역 요약(지역명, 추천 이유)
+  3. 날씨 정보
+  4. 행사 / 볼거리
+  5. 맛집 리스트
+  6. 1일 일정 제안(오전, 오후, 저녁)
+  7. 최종 정리(포인트)
 
-- 결과물 화면 캡처 (입력/요청: --date 2026-11-10)  
-<img width="1220" height="515" alt="image" src="https://github.com/user-attachments/assets/66f258af-fa46-46d8-9421-eb21922b802d" />
-<img width="1116" height="457" alt="image (1)" src="https://github.com/user-attachments/assets/49a4c594-845e-40fd-b89c-ba4c5c106064" />
-<img width="1092" height="770" alt="image (2)" src="https://github.com/user-attachments/assets/15753043-afad-41d5-bdd8-eb8bbf6a3e82" />
+- 결과물 화면 캡처
 
-<br>
+  [JSON]
+  <img width="1337" height="277" alt="image" src="https://github.com/user-attachments/assets/8fe32e9c-fff4-4864-8d9e-561b297eaf22" />
+
+  [Markdown]
+  <img width="1215" height="627" alt="image" src="https://github.com/user-attachments/assets/b5bf35d2-0776-40f3-ac85-18731faff410" />
+  <img width="1215" height="637" alt="image" src="https://github.com/user-attachments/assets/2c5c316a-b7a3-45dc-a697-57c224ec60c3" />
+  <img width="1142" height="567" alt="image" src="https://github.com/user-attachments/assets/2bb87fc7-eb96-49fb-a434-3320873bafb6" />
+
+  
 
 ## 🧠 Technical Insights
 
@@ -114,10 +115,10 @@ python main.py --help
 
 각 API의 특성에 맞춰 적절한 HTTP 메서드를 선택하여 설계했습니다.
 
-| API 종류 | 메서드 | 엔드포인트 (Example) | 설계 이유 |
-| :--- | :---: | :--- | :--- |
-| **Kakao Local** | **GET** | `/v2/local/search/keyword.json` | 특정 키워드를 기반으로 장소 정보를 **조회(Retrieve)**하는 것이 목적이며, 검색 파라미터를 URL에 포함하여 전달하는 RESTful 원칙을 준수합니다. |
-| **OpenAI** | **POST** | `/v1/chat/completions` | 프롬프트와 같은 **대량의 데이터**를 전송하여 새로운 응답을 **생성(Create)**해야 하며, 보안이 필요한 데이터와 설정을 Body에 담아 안전하게 전달합니다. |
+| API 종류 | 메서드 | 설계 이유 |
+| :--- | :---: | :--- |
+| **Kakao Local** | **GET** | 특정 키워드를 기반으로 장소 정보를 **조회(Retrieve)** 하는 것이 목적이며, 검색 파라미터를 URL에 포함하여 전달하는 RESTful 원칙을 준수합니다. |
+| **OpenAI** | **POST** | 프롬프트와 같은 **대량의 데이터**를 전송하여 새로운 응답을 **생성(Create)** 해야 하며, 보안이 필요한 데이터와 설정을 Body에 담아 안전하게 전달합니다. |
 
 ### 2. 데이터 구조화 및 파이프라인 구축
 
